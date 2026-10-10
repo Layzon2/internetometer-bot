@@ -28,8 +28,8 @@ DEFAULT_PORT = 8787
 
 def create_app(webapp_dir: Path = WEBAPP_DIR) -> web.Application:
     app = web.Application()
-    # Статика: /static/style.css, /static/app.js
-    app.router.add_static("/static", webapp_dir, show_index=False)
+    # Статика: /static/style.css, /static/app.js — физически лежат в webapp/static/
+    app.router.add_static("/static", webapp_dir / "static", show_index=False)
     # Все остальные пути, кроме статики, отдают index.html (SPA-заглушка).
     app.router.add_get("/", lambda _request: web.FileResponse(webapp_dir / "index.html"))
     app.router.add_get("/index.html", lambda _request: web.FileResponse(webapp_dir / "index.html"))
