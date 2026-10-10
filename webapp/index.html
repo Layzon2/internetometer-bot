@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Интернетометр</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+<header>
+  <div class="logo">🌐</div>
+  <div class="head-text">
+    <h1>Интернетометр</h1>
+    <p>проверка интернета прямо из Telegram</p>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-tab="speed">🚀 Тест</button>
+  <button class="tab" data-tab="calc">🧮 Калькулятор</button>
+  <button class="tab" data-tab="net">🌐 Сеть</button>
+</nav>
+
+<main>
+  <!-- ======================= ТЕСТ СКОРОСТИ ======================= -->
+  <section id="tab-speed" class="panel active">
+    <div class="card gauges">
+      <div class="gauge">
+        <span class="g-val" id="g-ping">—</span>
+        <span class="g-lbl">Пинг</span>
+      </div>
+      <div class="gauge main">
+        <span class="g-val" id="g-down">—</span>
+        <span class="g-lbl">Загрузка</span>
+      </div>
+      <div class="gauge">
+        <span class="g-val" id="g-up">—</span>
+        <span class="g-lbl">Отдача</span>
+      </div>
+    </div>
+
+    <div id="status" class="status">Готов к замеру. Тест идёт <b>с этого устройства</b> через Cloudflare.</div>
+
+    <div class="progress" id="progress-wrap">
+      <div id="bar" class="bar"></div>
+    </div>
+
+    <button id="btn-start" class="btn primary big">🚀 Начать тест</button>
+    <button id="btn-send" class="btn secondary big hidden">📤 Отправить результат в бот</button>
+    <button id="btn-retry" class="btn ghost big hidden">🔄 Повторить</button>
+
+    <div id="verdict" class="verdict hidden"></div>
+    <div id="details" class="details hidden"></div>
+  </section>
+
+  <!-- ======================= КАЛЬКУЛЯТОР ======================= -->
+  <section id="tab-calc" class="panel">
+    <div class="card">
+      <label for="calc-size">📦 Размер файла</label>
+      <div class="row">
+        <input id="calc-size" type="number" value="4.7" step="0.1" min="0">
+        <select id="calc-size-unit">
+          <option value="kb">КБ</option>
+          <option value="mb">МБ</option>
+          <option value="gb" selected>ГБ</option>
+          <option value="tb">ТБ</option>
+        </select>
+      </div>
+
+      <label for="calc-speed">🚀 Скорость</label>
+      <div class="row">
+        <input id="calc-speed" type="number" value="50" step="1" min="0">
+        <select id="calc-speed-unit">
+          <option value="mbps" selected>Мбит/с</option>
+          <option value="mbs">МБ/с</option>
+        </select>
+      </div>
+
+      <div id="calc-result" class="calc-result">—</div>
+    </div>
+
+    <div class="card hints">
+      <p>🎬 Фильм 4.7 ГБ на ⚡ 100 Мбит/с — около 6 минут</p>
+      <p>📱 Приложение 300 МБ на 📶 20 Мбит/с — около 2 минут</p>
+    </div>
+  </section>
+
+  <!-- ======================= ИНФО О СЕТИ ======================= -->
+  <section id="tab-net" class="panel">
+    <div class="card">
+      <div class="net-row"><span>🖥 IP</span><b id="net-ip">—</b></div>
+      <div class="net-row"><span>🏢 Провайдер</span><b id="net-org">—</b></div>
+      <div class="net-row"><span>🔢 ASN</span><b id="net-asn">—</b></div>
+      <div class="net-row"><span>📍 Локация</span><b id="net-loc">—</b></div>
+      <div class="net-row"><span>🛰 Узел Cloudflare</span><b id="net-colo">—</b></div>
+      <div class="net-row"><span>🔒 Протокол</span><b id="net-proto">—</b></div>
+      <button id="btn-net-refresh" class="btn ghost">🔄 Обновить</button>
+      <p class="note">Это данные вашего устройства, как их видит Cloudflare.</p>
+    </div>
+  </section>
+</main>
+
+<div id="toast" class="toast hidden"></div>
+<script src="static/app.js"></script>
+</body>
+</html>
